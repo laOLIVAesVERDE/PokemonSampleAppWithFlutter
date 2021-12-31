@@ -22,13 +22,12 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'Hello World',
-          style: TextStyle(
-            fontSize: 36,
-          ),
+        child: Image.network(
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+          height: 300,
+          width: 300,
         ),
       ),
     );
