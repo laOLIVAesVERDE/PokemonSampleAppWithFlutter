@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_sample_app/poke_detail.dart';
 
 void main() {
-  runApp(const TopPage());
+  runApp(const MyApp());
 }
 
-class TopPage extends StatelessWidget {
-  const TopPage({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +14,16 @@ class TopPage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PokeDetail(),
+      home: const TopPage(),
     );
+  }
+}
+
+class TopPage extends StatelessWidget {
+  const TopPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
