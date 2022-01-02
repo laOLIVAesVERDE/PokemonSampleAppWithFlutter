@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   child: const Text(
-                      "No.25",
+                    "No.25",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold
