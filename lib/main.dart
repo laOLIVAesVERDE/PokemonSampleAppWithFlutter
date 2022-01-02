@@ -27,10 +27,12 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-              height: 100,
-              width: 100,
+            Stack(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(32),
+                )
+              ],
             ),
             const Text(
               "pikachu",
