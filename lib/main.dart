@@ -35,6 +35,10 @@ class MyHomePage extends StatelessWidget {
             const Text(
               "pikachu",
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            ),
+            const Chip(
+              label: Text("electric"),
+              backgroundColor: Colors.yellow,
             )
           ]
         )
