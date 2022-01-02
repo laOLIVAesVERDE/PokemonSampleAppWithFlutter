@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_sample_app/poke_detail.dart';
+import './poke_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
