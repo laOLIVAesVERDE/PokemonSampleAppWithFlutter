@@ -31,7 +31,7 @@ class TopPage extends StatelessWidget {
           onPressed: () => {
             Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder:
+                    builder: (BuildContext context) => const PokeDetail()
                 )
             )
           },
