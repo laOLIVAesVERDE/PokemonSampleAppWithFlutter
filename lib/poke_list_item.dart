@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_sample_app/poke_detail.dart';
 
 class PokeListItem extends StatelessWidget {
   const PokeListItem({Key? key, required this.index}) : super(key: key);
@@ -13,6 +14,13 @@ class PokeListItem extends StatelessWidget {
         width: 50,
       ),
       title: const Text("pikachu"),
+      onTap: () => {
+        Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (BuildContext context) => const PokeDetail()
+            )
+        )
+      },
     );
   }
 }
