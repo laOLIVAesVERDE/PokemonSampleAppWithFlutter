@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
 class PokeListItem extends StatelessWidget {
-  const PokeListItem({Key? key}) : super(key: key);
+  const PokeListItem({Key? key, required this.index}) : super(key: key);
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListTile(
+      leading: Image.network(
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+        height: 50,
+        width: 50,
+      ),
+      title: const Text("pikachu"),
+    );
   }
 }
