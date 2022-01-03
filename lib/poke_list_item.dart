@@ -25,6 +25,7 @@ class PokeListItem extends StatelessWidget {
         "pikachu",
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
+      trailing: const Icon(Icons.navigate_next),
       onTap: () => {
         Navigator.of(context).push(
             MaterialPageRoute(
