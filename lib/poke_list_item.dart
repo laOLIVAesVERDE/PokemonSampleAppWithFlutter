@@ -20,13 +20,11 @@ class PokeListItem extends StatelessWidget {
               )
           )
         )
-      )
-      // Image.network(
-      //   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-      //   height: 50,
-      //   width: 50,
-      // ),
-      title: const Text("pikachu"),
+      ),
+      title: const Text(
+        "pikachu",
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
       onTap: () => {
         Navigator.of(context).push(
             MaterialPageRoute(
