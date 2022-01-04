@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ThemeModeSelectionPage extends StatelessWidget {
+class ThemeModeSelectionPage extends StatefulWidget {
   const ThemeModeSelectionPage({Key? key}) : super(key: key);
 
+  @override
+  State<ThemeModeSelectionPage> createState() => _ThemeModeSelectionPageState();
+}
+
+class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
