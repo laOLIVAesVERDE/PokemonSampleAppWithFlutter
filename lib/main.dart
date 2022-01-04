@@ -45,6 +45,7 @@ class _TopPageState extends State<TopPage> {
               () => currentItemIndex = index
           )
         },
+        currentIndex: currentItemIndex,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
