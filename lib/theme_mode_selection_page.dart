@@ -28,12 +28,12 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 // pop時に選択されたテーマを渡す
-                onPressed: () => Navigator.pop(context, _currentMode),
+                onPressed: () => Navigator.pop<ThemeMode>(context, _currentMode),
               ),
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.system,
-              groupValue: ThemeMode.system,
+              groupValue: _currentMode,
               title: const Text("System"),
               onChanged: (value) => {
                 setState(() => _currentMode = value!)
@@ -41,7 +41,7 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.dark,
-              groupValue: ThemeMode.system,
+              groupValue: _currentMode,
               title: const Text("Dark"),
               onChanged: (value) => {
                 setState(() => _currentMode = value!)
@@ -49,7 +49,7 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
             ),
             RadioListTile<ThemeMode>(
               value: ThemeMode.light,
-              groupValue: ThemeMode.system,
+              groupValue: _currentMode,
               title: const Text("Light"),
               onChanged: (value) => {
                 setState(() => _currentMode = value!)
