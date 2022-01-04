@@ -31,6 +31,9 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
                 onPressed: () => Navigator.pop<ThemeMode>(context, _currentMode),
               ),
             ),
+            /**
+             * ラジオボタンは、valueとgroupValueが一致した時に選択状態となる
+             */
             RadioListTile<ThemeMode>(
               value: ThemeMode.system,
               groupValue: _currentMode,
