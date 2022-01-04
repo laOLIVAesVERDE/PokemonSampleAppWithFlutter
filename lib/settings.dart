@@ -19,7 +19,7 @@ class _SettingsState extends State<Settings> {
           title: const Text("Dark/Light Mode"),
           trailing: Text(getModeString()),
           onTap: () async {
-            // 画面遷移
+            // モード選択画面での結果を受け取る
             var ret = await Navigator.of(context).push<ThemeMode>(
                 MaterialPageRoute(
                     builder: (context) => ThemeModeSelectionPage(mode: _themeMode)

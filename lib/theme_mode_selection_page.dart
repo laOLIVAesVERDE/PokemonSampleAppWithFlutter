@@ -27,6 +27,7 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
             ListTile(
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
+                // pop時に選択されたテーマを渡す
                 onPressed: () => Navigator.pop(context, _currentMode),
               ),
             ),
