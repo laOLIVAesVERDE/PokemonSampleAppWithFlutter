@@ -22,10 +22,10 @@ class _SettingsState extends State<Settings> {
             // 画面遷移
             var ret = await Navigator.of(context).push<ThemeMode>(
                 MaterialPageRoute(
-                    builder: (context) => ThemeModeSelectionPage()
+                    builder: (context) => ThemeModeSelectionPage(mode: _themeMode)
                 )
             );
-            //
+            // trailingテキスト更新
             setState(() => _themeMode = ret!);
           },
         )
