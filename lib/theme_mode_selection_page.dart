@@ -27,6 +27,18 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
               title: const Text("System"),
               onChanged: (value) => {},
             ),
+            RadioListTile(
+              value: ThemeMode.dark,
+              groupValue: ThemeMode.system,
+              title: const Text("Dark"),
+              onChanged: (value) => {},
+            ),
+            RadioListTile(
+              value: ThemeMode.light,
+              groupValue: ThemeMode.system,
+              title: const Text("Light"),
+              onChanged: (value) => {},
+            ),
           ],
         ),
       ),
