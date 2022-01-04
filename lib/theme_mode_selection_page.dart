@@ -18,7 +18,7 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
             ListTile(
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () => Navigator.pop(context, ThemeMode.light),
               ),
             ),
             RadioListTile<ThemeMode>(
