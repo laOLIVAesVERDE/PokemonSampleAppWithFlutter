@@ -20,6 +20,6 @@ ThemeMode toMode(String str) {
 
 /// ThemeModeの拡張関数
 extension ThemeModeEx on ThemeMode {
-  String get key => toString().split('.').first;
-  String get name => toString().split('.').last;
+  String get key => toString().split('.').first; // ThemeMode
+  String get name => toString().split('.').last; // system / dark / light
 }
