@@ -6,13 +6,18 @@ class ThemeModeSelectionPage extends StatefulWidget {
     required this.mode
   }) : super(key: key);
   final ThemeMode mode;
-  
+
   @override
   State<ThemeModeSelectionPage> createState() => _ThemeModeSelectionPageState();
 }
 
 class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
-  ThemeMode _currentMode = ThemeMode.system;
+  late ThemeMode _currentMode;
+  @override
+  void initState() {
+    super.initState();
+    _currentMode = widget.mode;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,7 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
             ListTile(
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.pop(context, ThemeMode.light),
+                onPressed: () => Navigator.pop(context, _currentMode),
               ),
             ),
             RadioListTile<ThemeMode>(
