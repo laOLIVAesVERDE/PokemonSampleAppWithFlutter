@@ -21,16 +21,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class TopPage extends StatelessWidget {
+class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
+  @override
+  _TopPageState createState() => _TopPageState();
+}
+
+class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-          itemCount: 898,
-          itemBuilder: (context, index) => PokeListItem(index: index)
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+            itemCount: 898,
+            itemBuilder: (context, index) => PokeListItem(index: index)
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -49,3 +54,33 @@ class TopPage extends StatelessWidget {
     );
   }
 }
+
+//
+// class TopPage extends StatelessWidget {
+//   const TopPage({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: ListView.builder(
+//           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+//           itemCount: 898,
+//           itemBuilder: (context, index) => PokeListItem(index: index)
+//         ),
+//       ),
+//       bottomNavigationBar: BottomNavigationBar(
+//         onTap: (index) => {},
+//         items: const [
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.list),
+//               label: "home"
+//           ),
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.settings),
+//               label: "settings"
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
