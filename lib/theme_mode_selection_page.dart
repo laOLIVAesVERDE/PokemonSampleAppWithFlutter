@@ -8,6 +8,7 @@ class ThemeModeSelectionPage extends StatefulWidget {
 }
 
 class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
+  ThemeMode _currentMode = ThemeMode.system;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +20,13 @@ class _ThemeModeSelectionPageState extends State<ThemeModeSelectionPage> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.pop(context),
               ),
-            )
+            ),
+            RadioListTile(
+              value: ThemeMode.system,
+              groupValue: ThemeMode.system,
+              title: const Text("System"),
+              onChanged: (value) => {},
+            ),
           ],
         ),
       ),
