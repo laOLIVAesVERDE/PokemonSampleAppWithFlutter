@@ -28,6 +28,7 @@ class TopPage extends StatefulWidget {
 }
 
 class _TopPageState extends State<TopPage> {
+  int currentItemIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,11 @@ class _TopPageState extends State<TopPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) => {},
+        onTap: (index) => {
+          setState(
+              () => currentItemIndex = index
+          )
+        },
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.list),
