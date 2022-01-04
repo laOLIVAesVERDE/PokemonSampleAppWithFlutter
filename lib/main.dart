@@ -42,7 +42,7 @@ class TopPage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: "home"
+              label: "settings"
           )
         ],
       ),
