@@ -14,8 +14,8 @@ Future<ThemeMode> loadThemeMode() async {
   return toMode(modeName ?? defaultTheme.name);
 }
 
-ThemeMode toMode(String str) {
-  return ThemeMode.values.where((value) => value.name == str).first;
+ThemeMode toMode(String modeName) {
+  return ThemeMode.values.where((value) => value.name == modeName).first;
 }
 
 /// ThemeModeの拡張関数
