@@ -17,6 +17,7 @@ class _SettingsState extends State<Settings> {
         ListTile(
           leading: const Icon(Icons.lightbulb),
           title: const Text("Dark/Light Mode"),
+          trailing: Text(getModeString()),
           onTap: () async {
             // 画面遷移
             var ret = await Navigator.of(context).push<ThemeMode>(
@@ -24,11 +25,19 @@ class _SettingsState extends State<Settings> {
                     builder: (context) => ThemeModeSelectionPage()
                 )
             );
-            // 
+            //
             setState(() => _themeMode = ret!);
           },
         )
       ],
     );
+  }
+
+  String getModeString() {
+    switch (_themeMode) {
+      case ThemeMode.system: return "System";
+      case ThemeMode.dark: return "Dark";
+      case ThemeMode.light: return "Light";
+    }
   }
 }
