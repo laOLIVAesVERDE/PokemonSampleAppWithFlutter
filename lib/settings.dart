@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_sample_app/theme_mode_selection_page.dart';
-import 'package:pokemon_sample_app/utils/theme_mode.dart';
+import './utils/theme_mode.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -35,6 +35,7 @@ class _SettingsState extends State<Settings> {
             );
             // trailingテキスト更新
             setState(() => _themeMode = ret!);
+            await saveThemeMode(_themeMode);
           },
         )
       ],
