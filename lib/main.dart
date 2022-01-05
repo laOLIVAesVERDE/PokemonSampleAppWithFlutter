@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './utils/theme_mode.dart';
 import './settings.dart';
 import './poke_list.dart';
 
@@ -14,6 +15,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ThemeMode themeMode = ThemeMode.system;
+  @override
+  void initState() {
+    super.initState();
+    loadThemeMode().then((value) =>
+        setState(() => themeMode = value)
+    );
+  }
   @override
   Widget build(BuildContext context) {
     ThemeMode mode = ThemeMode.system;
