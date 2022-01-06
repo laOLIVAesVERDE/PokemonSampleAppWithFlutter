@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/theme_mode.dart';
 
 class ThemeModeNotifier extends ChangeNotifier {
   late ThemeMode _themeMode;
   ThemeMode get mode => _themeMode;
-  ThemeModeNotifier() {
-    _init();
+  ThemeModeNotifier(SharedPreferences pref) {
+    _init(pref);
   }
 
-  void _init() async {
-    _themeMode = await loadThemeMode();
+  void _init(SharedPreferences pref) async {
+    _themeMode = await loadThemeMode(pref);
     notifyListeners();
   }
 
