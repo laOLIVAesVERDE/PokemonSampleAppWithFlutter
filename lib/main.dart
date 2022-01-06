@@ -1,10 +1,19 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:pokemon_sample_app/models/theme_mode_notifier.dart';
+import 'package:provider/provider.dart';
 import './utils/theme_mode.dart';
 import './settings.dart';
 import './poke_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeModeNotifier(),
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatefulWidget {
