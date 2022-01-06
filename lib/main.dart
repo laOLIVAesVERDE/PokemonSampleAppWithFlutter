@@ -24,22 +24,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode themeMode = ThemeMode.system;
-  @override
-  void initState() {
-    super.initState();
-    loadThemeMode().then((value) =>
-        setState(() => themeMode = value)
-    );
-  }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokemon Flutter',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      themeMode: themeMode,
-      home: const TopPage(),
+    return Consumer<ThemeModeNotifier>(
+      builder: (context, modeNotifier, child) => MaterialApp(
+        title: 'Pokemon Flutter',
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: modeNotifier.mode,
+        home: const TopPage(),
+      ),
     );
   }
 }
