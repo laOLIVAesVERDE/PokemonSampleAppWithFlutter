@@ -5,8 +5,9 @@ class ThemeModeNotifier extends ChangeNotifier {
   late ThemeMode _themeMode;
   ThemeMode get mode => _themeMode;
   ThemeModeNotifier() {
-
+    _init();
   }
+
   void _init() async {
     _themeMode = await loadThemeMode();
     notifyListeners();
