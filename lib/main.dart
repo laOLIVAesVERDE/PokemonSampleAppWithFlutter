@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:pokemon_sample_app/models/theme_mode_notifier.dart';
 import 'package:provider/provider.dart';
