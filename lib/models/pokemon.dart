@@ -11,6 +11,8 @@ class Pokemon {
     required this.imageUrl
   });
 
+  // Dartでは、引数が違っていても同じ名前の関数を複数宣言できないので、
+  // その対策としてNamed ConstructorやFactory Constructorが用意されている
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     List<String> typeToList(dynamic types) {
       List<String> resultList = [];
