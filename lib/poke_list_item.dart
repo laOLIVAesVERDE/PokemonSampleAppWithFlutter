@@ -15,19 +15,17 @@ class PokeListItem extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.yellow.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(
+                image: DecorationImage(
                     fit: BoxFit.fitWidth,
-                    image: NetworkImage(
-                      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-                    )
+                    image: NetworkImage(pokemon!.imageUrl)
                 )
             )
         ),
-        title: const Text(
-          "pikachu",
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        title: Text(
+          pokemon!.name,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        subtitle: const Text('⚡️electric'),
+        subtitle: Text(pokemon!.types.first),
         trailing: const Icon(Icons.navigate_next),
         onTap: () => {
           Navigator.of(context).push(
