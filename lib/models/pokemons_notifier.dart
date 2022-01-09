@@ -6,21 +6,19 @@ class PokemonsNotifier extends ChangeNotifier {
   final Map<int, Pokemon?> _pokeMap = {};
   Map<int, Pokemon?> get pokes => _pokeMap;
 
-  void addPoke(Pokemon pokemon) {
+  void _addPoke(Pokemon pokemon) {
     _pokeMap[pokemon.id] = pokemon;
     notifyListeners();
   }
 
   Pokemon? byId(int id) {
-    if (_pokeMap.containsKey(id)) {
-      fetchPoke(id);
-    }
+    if (!_pokeMap.containsKey(id)) fetchPoke(id);
     return _pokeMap[id];
   }
 
   void fetchPoke(int id) async {
     _pokeMap[id] = null;
-    // apiアクセス
-    addPoke(await fetchPokemon(id));
+    // apiアクセスした結果を引数として渡す
+    _addPoke(await fetchPokemon(id));
   }
 }
