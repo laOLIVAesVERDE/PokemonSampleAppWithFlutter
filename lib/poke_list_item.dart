@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/pokemon.dart';
 import 'package:pokemon_sample_app/poke_detail.dart';
 
@@ -13,7 +14,7 @@ class PokeListItem extends StatelessWidget {
         leading: Container(
             width: 80,
             decoration: BoxDecoration(
-                color: Colors.yellow.withOpacity(.5),
+                color: (pokeTypeColors[pokemon!.types.first] ?? Colors.grey[100])?.withOpacity(.3),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                     fit: BoxFit.fitWidth,
