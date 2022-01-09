@@ -16,9 +16,11 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => themeModeNotifier,
+          create: (context) => themeModeNotifier
         ),
-
+        ChangeNotifierProvider(
+            create: (context) => pokemonsNotifier
+        )
       ],
       child: const MyApp(),
     )
