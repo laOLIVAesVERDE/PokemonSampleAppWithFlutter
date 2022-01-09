@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_sample_app/models/pokemon.dart';
 import 'package:pokemon_sample_app/poke_detail.dart';
 
 class PokeListItem extends StatelessWidget {
-  const PokeListItem({Key? key, required this.index}) : super(key: key);
-  final int index;
+  const PokeListItem({Key? key, required this.pokemon}) : super(key: key);
+  final Pokemon? pokemon;
 
   @override
   Widget build(BuildContext context) {
