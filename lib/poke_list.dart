@@ -19,7 +19,7 @@ class _PokeListState extends State<PokeList> {
     return Consumer<PokemonsNotifier>(
         builder: (context, pokemonsNotifier, child) => ListView.builder(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            itemCount: pokeCount + 1,
+            itemCount: pokeCount + 1, // setStateが呼ばれたタイミングでカウントアップ
             itemBuilder: (context, index) {
               if (index == pokeCount) {
                 return OutlinedButton(
