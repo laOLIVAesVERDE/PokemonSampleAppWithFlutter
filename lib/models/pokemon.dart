@@ -17,7 +17,7 @@ class Pokemon {
     List<String> typeToList(dynamic types) {
       List<String> resultList = [];
       for (int i = 0; i < types.length; i++) {
-        resultList.add(types[i]['types']['name']);
+        resultList.add(types[i]['type']['name']);
       }
       return resultList;
     }
