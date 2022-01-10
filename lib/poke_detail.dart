@@ -19,6 +19,7 @@ class PokeDetail extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
               ),
             ),
+            const Spacer(),
             Stack(
               children: [
                 Container(
@@ -63,7 +64,8 @@ class PokeDetail extends StatelessWidget {
                       )
                   )
               ).toList(),
-            )
+            ),
+            const Spacer(),
           ],
         ),
       )
