@@ -41,6 +41,7 @@ class PokeDetail extends StatelessWidget {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  // PaddingWidgetのリストを渡す
                   children: pokemon.types.map((type) =>
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -49,7 +50,8 @@ class PokeDetail extends StatelessWidget {
                           label: Text(
                             type,
                             style: TextStyle(
-                              color: Colors.yellow.computeLuminance() > 0.5 ? Colors.black : Colors.white,
+                              fontWeight: FontWeight.bold,
+                              color: _getTextLuminanceBy(type) > 0.5 ? Colors.black : Colors.white,
                             ),
                           ),
                         )
@@ -60,5 +62,9 @@ class PokeDetail extends StatelessWidget {
           )
       ),
     );
+  }
+
+  double _getTextLuminanceBy(String type) {
+    return (pokeTypeColors[type] ?? Colors.grey).computeLuminance();
   }
 }
