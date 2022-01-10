@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'constants/api_constants.dart';
 import 'models/pokemon.dart';
 
 class PokeDetail extends StatelessWidget {
@@ -38,14 +39,22 @@ class PokeDetail extends StatelessWidget {
                   pokemon.name,
                   style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                 ),
-                Chip(
-                  backgroundColor: Colors.yellow,
-                  label: Text(
-                    "electric",
-                    style: TextStyle(
-                      color: Colors.yellow.computeLuminance() > 0.5 ? Colors.black : Colors.white,
-                    ),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: pokemon.types.map((type) =>
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Chip(
+                          backgroundColor: pokeTypeColors[type] ?? Colors.grey,
+                          label: Text(
+                            type,
+                            style: TextStyle(
+                              color: Colors.yellow.computeLuminance() > 0.5 ? Colors.black : Colors.white,
+                            ),
+                          ),
+                        )
+                      )
+                  ).toList(),
                 )
               ]
           )
