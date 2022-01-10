@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:provider/provider.dart';
 import './poke_list_item.dart';
@@ -23,7 +24,10 @@ class _PokeListState extends State<PokeList> {
               if (index == pokeCount) {
                 return OutlinedButton(
                     onPressed: () => {
-
+                      setState( () {
+                        pokeCount += more;
+                        if (pokeCount > pokeMaxId) pokeCount = pokeMaxId;
+                      })
                     },
                     child: const Text("more")
                 );
