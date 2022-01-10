@@ -11,12 +11,14 @@ class PokeList extends StatefulWidget {
 }
 
 class _PokeListState extends State<PokeList> {
+  static const int more = 30;
+  var pokeCount = more;
   @override
   Widget build(BuildContext context) {
     return Consumer<PokemonsNotifier>(
         builder: (context, pokemonsNotifier, child) => ListView.builder(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            itemCount: 10,
+            itemCount: pokeCount + 1,
             itemBuilder: (context, index) {
               return PokeListItem(
                 pokemon: pokemonsNotifier.byId(index + 1)
