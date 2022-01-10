@@ -20,9 +20,18 @@ class _PokeListState extends State<PokeList> {
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
             itemCount: pokeCount + 1,
             itemBuilder: (context, index) {
-              return PokeListItem(
-                pokemon: pokemonsNotifier.byId(index + 1)
-              );
+              if (index == pokeCount) {
+                return OutlinedButton(
+                    onPressed: () => {
+
+                    },
+                    child: const Text("more")
+                );
+              } else {
+                return PokeListItem(
+                    pokemon: pokemonsNotifier.byId(index + 1)
+                );
+              }
             }
         )
     );
