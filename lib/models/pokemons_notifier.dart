@@ -12,11 +12,11 @@ class PokemonsNotifier extends ChangeNotifier {
   }
 
   Pokemon? byId(int id) {
-    if (!_pokeMap.containsKey(id)) fetchPoke(id);
+    if (!_pokeMap.containsKey(id)) _fetchPoke(id);
     return _pokeMap[id];
   }
 
-  void fetchPoke(int id) async {
+  void _fetchPoke(int id) async {
     _pokeMap[id] = null;
     // apiアクセスした結果を引数として渡す
     _addPoke(await fetchPokemon(id));
