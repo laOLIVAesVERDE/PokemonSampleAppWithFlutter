@@ -72,7 +72,5 @@ class PokeDetail extends StatelessWidget {
     );
   }
 
-  double _getTextLuminanceBy(String type) {
-    return (pokeTypeColors[type] ?? Colors.grey).computeLuminance();
-  }
+  double _getTextLuminanceBy(String type) => (pokeTypeColors[type] ?? Colors.grey).computeLuminance();
 }

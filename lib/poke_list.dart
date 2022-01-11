@@ -19,15 +19,12 @@ class _PokeListState extends State<PokeList> {
     return Consumer<PokemonsNotifier>(
         builder: (context, pokemonsNotifier, child) => ListView.builder(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            itemCount: _currentPage + 1, // setStateが呼ばれたタイミングでカウントアップ
+            itemCount: itemCount() + 1, // setStateが呼ばれたタイミングでカウントアップ
             itemBuilder: (context, index) {
-              if (index == _currentPage) {
+              if (index == itemCount()) {
                 return OutlinedButton(
                     onPressed: () => {
-                      setState( () {
-                        _currentPage += pageSize;
-                        if (_currentPage > pokeMaxId) _currentPage = pokeMaxId;
-                      })
+                      setState( () => _currentPage++ )
                     },
                     child: const Text("more")
                 );
