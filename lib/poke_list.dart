@@ -30,7 +30,8 @@ class _PokeListState extends State<PokeList> {
             itemBuilder: (context, index) {
               if (index == itemCount(_currentPage, _isFavoriteMode)) {
                 return OutlinedButton(
-                    onPressed: () => {
+                    // 最終ページだったら反応させない
+                    onPressed: isLastPage(_currentPage) ? null : () => {
                       setState( () => _currentPage++ )
                     },
                     child: const Text("more")
@@ -62,5 +63,13 @@ class _PokeListState extends State<PokeList> {
       id = favMock[index].pokeId;
     }
     return id;
+  }
+
+  bool isLastPage(int page) {
+    if (_isFavoriteMode) {
+      return (page * pageSize < favMock.length) ? false : true;
+    } else {
+      return (page * pageSize < pokeMaxId) ? false : true;
+    }
   }
 }
