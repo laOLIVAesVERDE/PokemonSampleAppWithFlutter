@@ -37,7 +37,7 @@ class _PokeListState extends State<PokeList> {
                 );
               } else {
                 return PokeListItem(
-                    pokemon: pokemonsNotifier.byId(index + 1)
+                    pokemon: pokemonsNotifier.byId(itemId(index))
                 );
               }
             }
@@ -54,5 +54,13 @@ class _PokeListState extends State<PokeList> {
       count = pokeMaxId;
     }
     return count;
+  }
+  
+  int itemId(int index) {
+    int id = index + 1;
+    if (_isFavoriteMode) {
+      id = favMock[index].pokeId;
+    }
+    return id;
   }
 }
