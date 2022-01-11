@@ -23,26 +23,36 @@ class _PokeListState extends State<PokeList> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Consumer<PokemonsNotifier>(
-        builder: (context, pokemonsNotifier, child) => ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-            itemCount: itemCount(_currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
-            itemBuilder: (context, index) {
-              if (index == itemCount(_currentPage, _isFavoriteMode)) {
-                return OutlinedButton(
-                    // 最終ページだったら反応させない
-                    onPressed: isLastPage(_currentPage) ? null : () => {
-                      setState( () => _currentPage++ )
-                    },
-                    child: const Text("more")
-                );
-              } else {
-                return PokeListItem(
-                    pokemon: pokemonsNotifier.byId(itemId(index))
-                );
-              }
-            }
-        )
+    return Column(
+      children: [
+        IconButton(
+            icon: const Icon(Icons.star),
+            onPressed: () => {}
+        ),
+        Expanded(
+          child: Consumer<PokemonsNotifier>(
+              builder: (context, pokemonsNotifier, child) => ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                  itemCount: itemCount(_currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
+                  itemBuilder: (context, index) {
+                    if (index == itemCount(_currentPage, _isFavoriteMode)) {
+                      return OutlinedButton(
+                          // 最終ページだったら反応させない
+                          onPressed: isLastPage(_currentPage) ? null : () => {
+                            setState( () => _currentPage++ )
+                          },
+                          child: const Text("more")
+                      );
+                    } else {
+                      return PokeListItem(
+                          pokemon: pokemonsNotifier.byId(itemId(index))
+                      );
+                    }
+                  }
+              )
+          ),
+        ),
+      ],
     );
   }
 
