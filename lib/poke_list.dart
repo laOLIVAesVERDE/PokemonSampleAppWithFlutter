@@ -25,9 +25,20 @@ class _PokeListState extends State<PokeList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        IconButton(
-            icon: const Icon(Icons.star),
-            onPressed: () => {}
+        Container(
+          height: 24,
+          alignment: Alignment.topRight,
+          child: IconButton(
+              padding: const EdgeInsets.all(0),
+              icon: _isFavoriteMode
+                  ? const Icon(Icons.star, color: Colors.orangeAccent)
+                  : const Icon(Icons.star_outline),
+              onPressed: () => {
+                setState(
+                    () => _isFavoriteMode = !_isFavoriteMode
+                )
+              }
+          ),
         ),
         Expanded(
           child: Consumer<PokemonsNotifier>(
