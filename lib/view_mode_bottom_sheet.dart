@@ -15,6 +15,16 @@ class ViewModeBottomSheet extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      height: 300,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Center(
+        child: Column(
+          children: [
+            
+          ],
+        ),
+      ),
+    );
   }
 }
