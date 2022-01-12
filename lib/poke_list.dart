@@ -45,9 +45,7 @@ class _PokeListState extends State<PokeList> {
                       return ViewModeBottomSheet(isFavorite: _isFavoriteMode);
                     }
                 );
-                setState(
-                    () => _isFavoriteMode = !_isFavoriteMode
-                )
+                if (result == true) changeMode(_isFavoriteMode);
               }
           ),
         ),
@@ -76,6 +74,10 @@ class _PokeListState extends State<PokeList> {
         ),
       ],
     );
+  }
+
+  void changeMode(bool isFavoriteMode) {
+    setState(() => _isFavoriteMode = !isFavoriteMode);
   }
 
   int itemCount(int page, bool isFavoriteMode) {
