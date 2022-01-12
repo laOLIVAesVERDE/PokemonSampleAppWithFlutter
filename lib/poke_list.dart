@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/favorite.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
+import 'package:pokemon_sample_app/view_mode_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import './poke_list_item.dart';
 
@@ -30,10 +31,20 @@ class _PokeListState extends State<PokeList> {
           alignment: Alignment.topRight,
           child: IconButton(
               padding: const EdgeInsets.all(0),
-              icon: _isFavoriteMode
-                  ? const Icon(Icons.star, color: Colors.orangeAccent)
-                  : const Icon(Icons.star_outline),
-              onPressed: () => {
+              icon: const Icon(Icons.auto_awesome_outlined),
+              onPressed: () async {
+                final result = await showModalBottomSheet<bool>(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40)
+                      )
+                    ),
+                    builder: (BuildContext context) {
+                      return ViewModeBottomSheet(isFavorite: _isFavoriteMode);
+                    }
+                );
                 setState(
                     () => _isFavoriteMode = !_isFavoriteMode
                 )
