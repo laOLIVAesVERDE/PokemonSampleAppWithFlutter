@@ -39,6 +39,21 @@ class ViewModeBottomSheet extends StatelessWidget {
                 ),
               ),
             ),
+            ListTile(
+              leading: const Icon(Icons.swap_horiz),
+              title: Text(menuTitle(isFavorite)),
+              subtitle: Text(menuSubTitle(isFavorite)),
+              onTap: () => Navigator.pop(context, true),
+            ),
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)
+                )
+              ),
+              child: const Text("キャンセル"),
+              onPressed: () => Navigator.pop(context, false),
+            )
           ],
         ),
       ),
