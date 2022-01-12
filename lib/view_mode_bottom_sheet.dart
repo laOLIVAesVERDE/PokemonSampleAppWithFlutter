@@ -21,7 +21,24 @@ class ViewModeBottomSheet extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            
+            Container(
+              height: 5,
+              width: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).backgroundColor
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Text(
+                mainText(isFavorite),
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
           ],
         ),
       ),
