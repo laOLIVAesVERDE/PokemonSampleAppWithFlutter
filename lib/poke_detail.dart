@@ -3,6 +3,7 @@ import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/api_constants.dart';
+import 'models/favorite.dart';
 import 'models/pokemon.dart';
 
 class PokeDetail extends StatelessWidget {
@@ -22,8 +23,12 @@ class PokeDetail extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                 ),
                 trailing: IconButton(
-                  icon: const Icon(Icons.star_outline),
-                  onPressed: () => {},
+                  icon: favoritesNotifier.isExist(pokemon.id)
+                      ? const Icon(Icons.star, color: Colors.orangeAccent)
+                      : const Icon(Icons.star_outline),
+                  onPressed: () => {
+                    favoritesNotifier.toggle(Favorite(pokeId: pokemon.id))
+                  },
                 ),
               ),
               const Spacer(),
