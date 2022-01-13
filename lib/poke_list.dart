@@ -53,25 +53,31 @@ class _PokeListState extends State<PokeList> {
           ),
           Expanded(
             child: Consumer<PokemonsNotifier>(
-                builder: (context, pokemonsNotifier, child) => ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                    itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
-                    itemBuilder: (context, index) {
-                      if (index == itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode)) {
-                        return OutlinedButton(
-                            // 最終ページだったら反応させない
-                            onPressed: isLastPage(_currentPage) ? null : () => {
-                              setState( () => _currentPage++ )
-                            },
-                            child: const Text("more")
-                        );
-                      } else {
-                        return PokeListItem(
-                            pokemon: pokemonsNotifier.byId(itemId(index))
-                        );
-                      }
-                    }
-                )
+                builder: (context, pokemonsNotifier, child) {
+                   if (itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) == 0) {
+                    return const Text("no data");
+                  } else {
+                    return ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                        itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
+                        itemBuilder: (context, index) {
+                          if (index == itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode)) {
+                            return OutlinedButton(
+                              // 最終ページだったら反応させない
+                                onPressed: isLastPage(_currentPage) ? null : () => {
+                                  setState( () => _currentPage++ )
+                                },
+                                child: const Text("more")
+                            );
+                          } else {
+                            return PokeListItem(
+                                pokemon: pokemonsNotifier.byId(itemId(index))
+                            );
+                          }
+                        }
+                    );
+                  }
+                }
             ),
           ),
         ],
