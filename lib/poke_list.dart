@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/favorite.dart';
+import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:pokemon_sample_app/view_mode_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -24,55 +25,57 @@ class _PokeListState extends State<PokeList> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 24,
-          alignment: Alignment.topRight,
-          child: IconButton(
-              padding: const EdgeInsets.all(0),
-              icon: const Icon(Icons.auto_awesome_outlined),
-              onPressed: () async {
-                final result = await showModalBottomSheet<bool>(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40)
-                      )
-                    ),
-                    builder: (BuildContext context) {
-                      return ViewModeBottomSheet(isFavorite: _isFavoriteMode);
-                    }
-                );
-                if (result == true) changeMode(_isFavoriteMode);
-              }
+    return Consumer<FavoritesNotifier>(
+      builder: (context, favoritesNotifier, child) => Column(
+        children: [
+          Container(
+            height: 24,
+            alignment: Alignment.topRight,
+            child: IconButton(
+                padding: const EdgeInsets.all(0),
+                icon: const Icon(Icons.auto_awesome_outlined),
+                onPressed: () async {
+                  final result = await showModalBottomSheet<bool>(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40)
+                        )
+                      ),
+                      builder: (BuildContext context) {
+                        return ViewModeBottomSheet(isFavorite: _isFavoriteMode);
+                      }
+                  );
+                  if (result == true) changeMode(_isFavoriteMode);
+                }
+            ),
           ),
-        ),
-        Expanded(
-          child: Consumer<PokemonsNotifier>(
-              builder: (context, pokemonsNotifier, child) => ListView.builder(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  itemCount: itemCount(_currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
-                  itemBuilder: (context, index) {
-                    if (index == itemCount(_currentPage, _isFavoriteMode)) {
-                      return OutlinedButton(
-                          // 最終ページだったら反応させない
-                          onPressed: isLastPage(_currentPage) ? null : () => {
-                            setState( () => _currentPage++ )
-                          },
-                          child: const Text("more")
-                      );
-                    } else {
-                      return PokeListItem(
-                          pokemon: pokemonsNotifier.byId(itemId(index))
-                      );
+          Expanded(
+            child: Consumer<PokemonsNotifier>(
+                builder: (context, pokemonsNotifier, child) => ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                    itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
+                    itemBuilder: (context, index) {
+                      if (index == itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode)) {
+                        return OutlinedButton(
+                            // 最終ページだったら反応させない
+                            onPressed: isLastPage(_currentPage) ? null : () => {
+                              setState( () => _currentPage++ )
+                            },
+                            child: const Text("more")
+                        );
+                      } else {
+                        return PokeListItem(
+                            pokemon: pokemonsNotifier.byId(itemId(index))
+                        );
+                      }
                     }
-                  }
-              )
+                )
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -80,10 +83,10 @@ class _PokeListState extends State<PokeList> {
     setState(() => _isFavoriteMode = !isFavoriteMode);
   }
 
-  int itemCount(int page, bool isFavoriteMode) {
+  int itemCount(int favCount, int page, bool isFavoriteMode) {
     var count = page * pageSize;
     if (isFavoriteMode && count > favMock.length) {
-      count = favMock.length;
+      count = favCount;
     }
     if (count > pokeMaxId) {
       count = pokeMaxId;
