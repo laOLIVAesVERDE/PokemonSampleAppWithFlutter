@@ -21,6 +21,10 @@ class PokeDetail extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(context),
                 ),
+                trailing: IconButton(
+                  icon: const Icon(Icons.star_outline),
+                  onPressed: () => {},
+                ),
               ),
               const Spacer(),
               Stack(
