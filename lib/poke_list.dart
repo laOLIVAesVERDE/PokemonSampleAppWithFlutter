@@ -59,7 +59,8 @@ class _PokeListState extends State<PokeList> {
                   } else {
                     return ListView.builder(
                         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                        itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1, // setStateが呼ばれたタイミングでカウントアップ
+                        // setStateが呼ばれたタイミングでアイテム数を更新
+                        itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1,
                         itemBuilder: (context, index) {
                           if (index == itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode)) {
                             return OutlinedButton(
@@ -71,7 +72,7 @@ class _PokeListState extends State<PokeList> {
                             );
                           } else {
                             return PokeListItem(
-                                pokemon: pokemonsNotifier.byId(itemId(index))
+                                pokemon: pokemonsNotifier.byId(itemId(favoritesNotifier.favorites, index))
                             );
                           }
                         }
@@ -100,10 +101,10 @@ class _PokeListState extends State<PokeList> {
     return count;
   }
   
-  int itemId(int index) {
+  int itemId(List<Favorite> favorites, int index) {
     int id = index + 1;
-    if (_isFavoriteMode) {
-      id = favMock[index].pokeId;
+    if (_isFavoriteMode && index < favorites.length) {
+      id = favorites[index].pokeId;
     }
     return id;
   }
