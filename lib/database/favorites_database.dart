@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:pokemon_sample_app/constants/database_constants.dart';
+import 'package:pokemon_sample_app/models/favorite.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FavoritesDatabase {
@@ -14,6 +15,15 @@ class FavoritesDatabase {
         );
       },
       version: 1
+    );
+  }
+
+  static Future<void> create(Favorite favorite) async {
+    final db = await open();
+    await db.insert(
+      favoritesTableName,
+      favorite.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace
     );
   }
 }
