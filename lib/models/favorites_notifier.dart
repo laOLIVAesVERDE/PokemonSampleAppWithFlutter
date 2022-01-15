@@ -21,13 +21,13 @@ class FavoritesNotifier extends ChangeNotifier {
 
   bool isExist(int pokeId) => (_favorites.indexWhere((it) => it.pokeId == pokeId) < 0) ? false : true;
 
-  void _add(Favorite favorite) {
-    _favorites.add(favorite);
+  void _add(Favorite favorite) async {
+    await FavoritesDatabase.create(favorite);
     notifyListeners();
   }
 
-  void _delete(int id) {
-    _favorites.removeWhere((it) => it.pokeId == id);
+  void _delete(int id) async {
+    await FavoritesDatabase.delete(id);
     notifyListeners();
   }
 }
