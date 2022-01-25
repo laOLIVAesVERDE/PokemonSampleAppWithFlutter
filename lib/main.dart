@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:pokemon_sample_app/models/theme_mode_notifier.dart';
@@ -10,50 +11,55 @@ import './poke_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final SharedPreferences pref = await SharedPreferences.getInstance();
-  final themeModeNotifier = ThemeModeNotifier(pref);
-  final pokemonsNotifier = PokemonsNotifier();
-  final favoritesNotifier = FavoritesNotifier();
+  // final SharedPreferences pref = await SharedPreferences.getInstance();
+  // final themeModeNotifier = ThemeModeNotifier(pref);
+  // final pokemonsNotifier = PokemonsNotifier();
+  // final favoritesNotifier = FavoritesNotifier();
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => themeModeNotifier
-        ),
-        ChangeNotifierProvider(
-            create: (context) => pokemonsNotifier
-        ),
-        ChangeNotifierProvider(
-            create: (context) => favoritesNotifier
-        )
-      ],
-      child: const MyApp(),
+    const ProviderScope(
+      // providers: [
+      //   ChangeNotifierProvider(
+      //       create: (context) => pokemonsNotifier
+      //   ),
+      //   ChangeNotifierProvider(
+      //       create: (context) => favoritesNotifier
+      //   )
+      // ],
+      child: MyApp(),
     )
-
   );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<ThemeModeNotifier>(
-      builder: (context, modeNotifier, child) => MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+    return MaterialApp(
         title: 'Pokemon Flutter',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
-        themeMode: modeNotifier.mode,
-        home: const TopPage(),
-      ),
+        themeMode: themeMode,
+        home: const TopPage()
     );
   }
 }
+
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<ThemeModeNotifier>(
+//       builder: (context, modeNotifier, child) => MaterialApp(
+//         title: 'Pokemon Flutter',
+//         theme: ThemeData.light(),
+//         darkTheme: ThemeData.dark(),
+//         themeMode: modeNotifier.mode,
+//         home: const TopPage(),
+//       ),
+//     );
+//   }
+// }
 
 class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
