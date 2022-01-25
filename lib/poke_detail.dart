@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
+import 'package:pokemon_sample_app/utils/log.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/api_constants.dart';
 import 'models/favorite.dart';
 import 'models/pokemon.dart';
 
-class PokeDetail extends StatelessWidget {
-  const PokeDetail({Key? key, required this.pokemon}) : super(key: key);
+class PokeDetail extends ConsumerWidget {
   final Pokemon pokemon;
+  const PokeDetail({Key? key, required this.pokemon}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return Consumer<FavoritesNotifier>(
-      builder: (context, favoritesNotifier, child) => Scaffold(
+  Widget build(BuildContext context, WidgetRef ref) {
+    // watchすることでisExistが動くようになる
+    final favorites = ref.watch(favoritesProvider);
+    final favoritesNotifier = ref.read(favoritesProvider.notifier);
+    return Scaffold(
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,10 +30,10 @@ class PokeDetail extends StatelessWidget {
                   icon: favoritesNotifier.isExist(pokemon.id)
                       ? const Icon(Icons.star, color: Colors.orangeAccent)
                       : const Icon(Icons.star_outline),
-                  onPressed: () => {
-                    favoritesNotifier.toggle(Favorite(pokeId: pokemon.id))
-                  },
-                ),
+                  onPressed: () async {
+                    favoritesNotifier.toggle(Favorite(pokeId: pokemon.id));
+                  }
+                )
               ),
               const Spacer(),
               Stack(
@@ -81,8 +85,7 @@ class PokeDetail extends StatelessWidget {
             ],
           ),
         )
-      ),
-    );
+      );
   }
 
   double _getTextLuminanceBy(String type) => (pokeTypeColors[type] ?? Colors.grey).computeLuminance();
