@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
-import 'package:pokemon_sample_app/utils/log.dart';
-import 'package:provider/provider.dart';
-
 import 'constants/api_constants.dart';
 import 'models/favorite.dart';
 import 'models/pokemon.dart';
