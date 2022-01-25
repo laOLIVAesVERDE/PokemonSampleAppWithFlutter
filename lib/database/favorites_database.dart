@@ -38,7 +38,7 @@ class FavoritesDatabase {
   static Future<void> delete(int pokeId) async {
     final db = await open();
     await db.delete(
-        favoritesFileName,
+        favoritesTableName,
         where: "id = ?",
         whereArgs: [pokeId]
     );
