@@ -1,33 +1,37 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/database/favorites_database.dart';
 import 'package:pokemon_sample_app/models/favorite.dart';
 
-class FavoritesNotifier extends ChangeNotifier {
+final favoritesProvider = StateNotifierProvider<FavoritesNotifier, List<Favorite>>((ref) {
+  return FavoritesNotifier();
+});
+
+class FavoritesNotifier extends StateNotifier<List<Favorite>> {
   final List<Favorite> _favorites = [];
   List<Favorite> get favorites => _favorites;
 
-  FavoritesNotifier() { syncDatabase(); }
+  FavoritesNotifier() : super([]) {
+    syncDatabase();
+  }
 
   void syncDatabase() async {
-    FavoritesDatabase.read().then((value) =>
-        _favorites..clear()..addAll(value)
-    );
-    notifyListeners();
+    state = await FavoritesDatabase.read();
   }
 
-  void toggle(Favorite favorite) {
+  void toggle(Favorite favorite) async {
     isExist(favorite.pokeId) ? _delete(favorite.pokeId) : _add(favorite);
+    state = await FavoritesDatabase.read();
   }
 
-  bool isExist(int pokeId) => (_favorites.indexWhere((it) => it.pokeId == pokeId) < 0) ? false : true;
+  bool isExist(int pokeId) => (state.indexWhere((it) => it.pokeId == pokeId) < 0) ? false : true;
 
   void _add(Favorite favorite) async {
     await FavoritesDatabase.create(favorite);
-    notifyListeners();
+    state = await FavoritesDatabase.read();
   }
 
   void _delete(int id) async {
     await FavoritesDatabase.delete(id);
-    notifyListeners();
+    state = await FavoritesDatabase.read();
   }
 }
