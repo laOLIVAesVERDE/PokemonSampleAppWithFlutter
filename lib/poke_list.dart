@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/favorite.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:pokemon_sample_app/view_mode_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 import './poke_list_item.dart';
 
-class PokeList extends StatefulWidget {
+class PokeList extends ConsumerStatefulWidget {
   const PokeList({Key? key}) : super(key: key);
 
   @override
-  State<PokeList> createState() => _PokeListState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _PokeListState();
+  }
 }
 
-class _PokeListState extends State<PokeList> {
+class _PokeListState extends ConsumerState<PokeList> {
   static const int pageSize = 30;
   var _currentPage = 1;
   bool _isFavoriteMode = false;
@@ -25,8 +27,9 @@ class _PokeListState extends State<PokeList> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Consumer<FavoritesNotifier>(
-      builder: (context, favoritesNotifier, child) => Column(
+    final favorites = ref.watch(favoritesProvider);
+    final pokemonsNotifier = ref.read(pokemonsProvider.notifier);
+    return Column(
         children: [
           Container(
             height: 24,
@@ -52,38 +55,30 @@ class _PokeListState extends State<PokeList> {
             ),
           ),
           Expanded(
-            child: Consumer<PokemonsNotifier>(
-                builder: (context, pokemonsNotifier, child) {
-                   if (itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) == 0) {
-                    return const Text("no data");
+            child: (itemCount(favorites.length, _currentPage, _isFavoriteMode)) == 0
+                ? const Text("no data")
+                : ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                // setStateが呼ばれたタイミングでアイテム数を更新
+                itemCount: itemCount(favorites.length, _currentPage, _isFavoriteMode) + 1,
+                itemBuilder: (context, index) {
+                  if (index == itemCount(favorites.length, _currentPage, _isFavoriteMode)) {
+                    return OutlinedButton(
+                      // 最終ページだったら反応させない
+                        onPressed: isLastPage(_currentPage) ? null : () => {
+                          setState( () => _currentPage++ )
+                        },
+                        child: const Text("more")
+                    );
                   } else {
-                    return ListView.builder(
-                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                        // setStateが呼ばれたタイミングでアイテム数を更新
-                        itemCount: itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode) + 1,
-                        itemBuilder: (context, index) {
-                          if (index == itemCount(favoritesNotifier.favorites.length, _currentPage, _isFavoriteMode)) {
-                            return OutlinedButton(
-                              // 最終ページだったら反応させない
-                                onPressed: isLastPage(_currentPage) ? null : () => {
-                                  setState( () => _currentPage++ )
-                                },
-                                child: const Text("more")
-                            );
-                          } else {
-                            return PokeListItem(
-                                pokemon: pokemonsNotifier.byId(itemId(favoritesNotifier.favorites, index))
-                            );
-                          }
-                        }
+                    return PokeListItem(
+                        pokemon: pokemonsNotifier.byId(itemId(favorites, index))
                     );
                   }
-                }
+                })
             ),
-          ),
         ],
-      ),
-    );
+      );
   }
 
   void changeMode(bool isFavoriteMode) {
