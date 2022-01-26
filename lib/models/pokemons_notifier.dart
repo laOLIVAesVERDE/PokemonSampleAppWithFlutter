@@ -1,13 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokemon_sample_app/api/poke_api.dart';
 import 'package:pokemon_sample_app/models/pokemon.dart';
 
-class PokemonsNotifier extends ChangeNotifier {
+final pokemonsProvider = StateNotifierProvider<PokemonsNotifier, Map<int, Pokemon?>>((ref) {
+  return PokemonsNotifier();
+});
+class PokemonsNotifier extends StateNotifier<Map<int, Pokemon?>> {
   final Map<int, Pokemon?> _pokeMap = {};
+  PokemonsNotifier() : super({});
 
   void _addPoke(Pokemon pokemon) {
     _pokeMap[pokemon.id] = pokemon;
-    notifyListeners();
   }
 
   Pokemon? byId(int id) {
@@ -19,5 +22,6 @@ class PokemonsNotifier extends ChangeNotifier {
     _pokeMap[id] = null;
     // apiアクセスした結果を引数として渡す
     _addPoke(await fetchPokemon(id));
+    state = _pokeMap;
   }
 }
