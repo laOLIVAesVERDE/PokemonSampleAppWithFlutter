@@ -11,20 +11,8 @@ import './poke_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final SharedPreferences pref = await SharedPreferences.getInstance();
-  // final themeModeNotifier = ThemeModeNotifier(pref);
-  // final pokemonsNotifier = PokemonsNotifier();
-  // final favoritesNotifier = FavoritesNotifier();
   runApp(
     const ProviderScope(
-      // providers: [
-      //   ChangeNotifierProvider(
-      //       create: (context) => pokemonsNotifier
-      //   ),
-      //   ChangeNotifierProvider(
-      //       create: (context) => favoritesNotifier
-      //   )
-      // ],
       child: MyApp(),
     )
   );
@@ -45,21 +33,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-// class _MyAppState extends State<MyApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Consumer<ThemeModeNotifier>(
-//       builder: (context, modeNotifier, child) => MaterialApp(
-//         title: 'Pokemon Flutter',
-//         theme: ThemeData.light(),
-//         darkTheme: ThemeData.dark(),
-//         themeMode: modeNotifier.mode,
-//         home: const TopPage(),
-//       ),
-//     );
-//   }
-// }
 
 class TopPage extends StatefulWidget {
   const TopPage({Key? key}) : super(key: key);
