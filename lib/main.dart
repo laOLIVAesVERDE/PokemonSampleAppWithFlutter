@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:pokemon_sample_app/models/theme_mode_notifier.dart';
@@ -18,9 +20,8 @@ void main() async {
   );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
