@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pokemon_sample_app/constants/api_constants.dart';
 import 'package:pokemon_sample_app/models/favorite.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
@@ -7,7 +8,7 @@ import 'package:pokemon_sample_app/models/pokemons_notifier.dart';
 import 'package:pokemon_sample_app/view_mode_bottom_sheet.dart';
 import './poke_list_item.dart';
 
-class PokeList extends ConsumerStatefulWidget {
+class PokeList extends StatefulHookConsumerWidget {
   const PokeList({Key? key}) : super(key: key);
 
   @override
