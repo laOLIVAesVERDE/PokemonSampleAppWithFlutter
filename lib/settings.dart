@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pokemon_sample_app/models/theme_mode_notifier.dart';
 import 'package:pokemon_sample_app/theme_mode_selection_page.dart';
 
-class Settings extends ConsumerWidget {
+class Settings extends HookConsumerWidget {
   const Settings({Key? key}) : super(key: key);
 
   @override
