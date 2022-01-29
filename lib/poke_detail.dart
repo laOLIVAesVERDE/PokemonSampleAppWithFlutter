@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pokemon_sample_app/models/favorites_notifier.dart';
 import 'constants/api_constants.dart';
 import 'models/favorite.dart';
 import 'models/pokemon.dart';
 
-class PokeDetail extends ConsumerWidget {
+class PokeDetail extends HookConsumerWidget {
   final Pokemon pokemon;
   const PokeDetail({Key? key, required this.pokemon}) : super(key: key);
   @override
