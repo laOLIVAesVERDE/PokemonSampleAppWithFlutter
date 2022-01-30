@@ -29,4 +29,8 @@ class Pokemon {
         imageUrl: json['sprites']['other']['official-artwork']['front_default']
     );
   }
+
+  factory Pokemon.fromError() {
+    return Pokemon(id: 0, name: "---", types: ["---"], imageUrl: "");
+  }
 }
