@@ -8,6 +8,6 @@ Future<Pokemon> fetchPokemon(int id) async {
   if (response.statusCode == 200) {
     return Pokemon.fromJson(json.decode(response.body));
   } else {
-    throw Exception("Failed to Load Pokemon");
+    return Pokemon.fromError();
   }
 }
